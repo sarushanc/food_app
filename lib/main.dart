@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'First App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.teal,
       ),
       home: const MyHomePage(title: 'first App'),
     );
