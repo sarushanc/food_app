@@ -6,7 +6,14 @@ class databaseConnection {
   Future<Database> setDatabase() async {
     var directory = await getApplicationDocumentsDirectory();
     var path = join(directory.path, 'db_crud');
-    var database = await openDatabase(path, version: 1, onCreate: _createDatabase);
+    var database =
+        await openDatabase(path, version: 1, onCreate: _createDatabase);
     return database;
   }
+
+  Future<void> _createDatabase(Database database, int version) async {
+    String sql =
+        "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, contact TEXT, description TEXT);";
+    await database.execute(sql);
+  } 
 }
