@@ -1,5 +1,6 @@
 import 'package:my_app/db_helper/repository.dart';
-import '../../models/user.dart';
+import 'package:my_app/models/user.dart';
+
 
 class UserService
 {

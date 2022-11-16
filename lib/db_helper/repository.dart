@@ -2,9 +2,9 @@ import 'package:my_app/db_helper/database_connection.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Repository {
-  late databaseConnection _databaseConnection;
+  late DatabaseConnection _databaseConnection;
   Repository() {
-    _databaseConnection = databaseConnection();
+    _databaseConnection = DatabaseConnection();
   }
   static Database? _database;
   Future<Database?> get database async {
