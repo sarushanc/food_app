@@ -4,7 +4,7 @@ class User {
   String? contact;
   String? description;
 
-  usermap() {
+  userMap() {
     var mapping = <String, dynamic>{};
     mapping['id'] = id;
     mapping['name'] = name!;

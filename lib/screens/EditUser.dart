@@ -1,15 +1,16 @@
 import 'package:my_app/models/user.dart';
-import 'package:flutter/material.dart';
 import 'package:my_app/screens/services/userService.dart';
+import 'package:flutter/material.dart';
 
-class AddUser extends StatefulWidget {
-  const AddUser({Key? key}) : super(key: key);
+class EditUser extends StatefulWidget {
+  final User user;
+  const EditUser({Key? key,required this.user}) : super(key: key);
 
   @override
-  State<AddUser> createState() => _AddUserState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _AddUserState extends State<AddUser> {
+class _EditUserState extends State<EditUser> {
   var _userNameController = TextEditingController();
   var _userContactController = TextEditingController();
   var _userDescriptionController = TextEditingController();
@@ -17,6 +18,16 @@ class _AddUserState extends State<AddUser> {
   bool _validateContact = false;
   bool _validateDescription = false;
   var _userService=UserService();
+
+  @override
+  void initState() {
+    setState(() {
+      _userNameController.text=widget.user.name??'';
+      _userContactController.text=widget.user.contact??'';
+      _userDescriptionController.text=widget.user.description??'';
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +41,7 @@ class _AddUserState extends State<AddUser> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Add New User',
+                'Edit New User',
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.teal,
@@ -46,7 +57,7 @@ class _AddUserState extends State<AddUser> {
                     hintText: 'Enter Name',
                     labelText: 'Name',
                     errorText:
-                        _validateName ? 'Name Value Can\'t Be Empty' : null,
+                    _validateName ? 'Name Value Can\'t Be Empty' : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -100,16 +111,17 @@ class _AddUserState extends State<AddUser> {
                         if (_validateName == false &&
                             _validateContact == false &&
                             _validateDescription == false) {
-                         // print("Good Data Can Save");
+                          // print("Good Data Can Save");
                           var _user = User();
+                          _user.id=widget.user.id;
                           _user.name = _userNameController.text;
                           _user.contact = _userContactController.text;
                           _user.description = _userDescriptionController.text;
-                          var result=await _userService.SaveUser(_user);
-                         Navigator.pop(context,result);
+                          var result=await _userService.UpdateUser(_user);
+                          Navigator.pop(context,result);
                         }
                       },
-                      child: const Text('Save Details')),
+                      child: const Text('Update Details')),
                   const SizedBox(
                     width: 10.0,
                   ),
