@@ -10,13 +10,13 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
-  var _userNameController = TextEditingController();
-  var _userContactController = TextEditingController();
-  var _userDescriptionController = TextEditingController();
+  final _userNameController = TextEditingController();
+  final _userContactController = TextEditingController();
+  final _userDescriptionController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
   bool _validateDescription = false;
-  var _userService=UserService();
+  final _userService=UserService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,12 +101,12 @@ class _AddUserState extends State<AddUser> {
                             _validateContact == false &&
                             _validateDescription == false) {
                          // print("Good Data Can Save");
-                          var _user = User();
-                          _user.name = _userNameController.text;
-                          _user.contact = _userContactController.text;
-                          _user.description = _userDescriptionController.text;
-                          var result=await _userService.SaveUser(_user);
-                         Navigator.pop(context,result);
+                          var user = User();
+                          user.name = _userNameController.text;
+                          user.contact = _userContactController.text;
+                          user.description = _userDescriptionController.text;
+                          var result=await _userService.saveUser(user);
+                          Navigator.pop(context,result);
                         }
                       },
                       child: const Text('Save Details')),
